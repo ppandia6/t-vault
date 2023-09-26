@@ -33,27 +33,27 @@ public class TMOAppMetadata implements Serializable {
 	private String path;
 
 	@JsonProperty("data")
-	private TMOAppMetadataDetails tmoAppMetadataDetails;
+	private TMOMetaData tmoAppMetadataDetails;
 
 	public TMOAppMetadata() {
 		super();
 	}
 	
-	 public TMOAppMetadata(String path, TMOAppMetadataDetails tmoMetadataDetails) {
+	 public TMOAppMetadata(String path, TMOMetaData tmoMetadataDetails) {
 	        super();
 	        this.path = path;
 	        this.tmoAppMetadataDetails = tmoMetadataDetails;
 	    }
 
-	public TMOAppMetadata(TMOAppMetadataDetails tmoAppMetadataDetails) {
+	public TMOAppMetadata(TMOMetaData tmoAppMetadataDetails) {
 		this.tmoAppMetadataDetails = tmoAppMetadataDetails;
 	}
 
-	public TMOAppMetadataDetails getTmoAppMetadataDetails() {
+	public TMOMetaData getTmoAppMetadataDetails() {
 		return tmoAppMetadataDetails;
 	}
 
-	public void setTmoAppMetadataDetails(TMOAppMetadataDetails tmoAppMetadataDetails) {
+	public void setTmoAppMetadataDetails(TMOMetaData tmoAppMetadataDetails) {
 		this.tmoAppMetadataDetails = tmoAppMetadataDetails;
 	}
 

@@ -3,9 +3,7 @@ package com.tmobile.cso.vault.api.service;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonNull;
 import com.tmobile.cso.vault.api.controller.ControllerUtil;
-import com.tmobile.cso.vault.api.exception.TVaultValidationException;
-import com.tmobile.cso.vault.api.model.TMOAppMetadata;
-import com.tmobile.cso.vault.api.model.TMOAppMetadataDetails;
+import com.tmobile.cso.vault.api.model.TMOMetaData;
 import com.tmobile.cso.vault.api.model.UserDetails;
 import com.tmobile.cso.vault.api.process.RequestProcessor;
 import com.tmobile.cso.vault.api.process.Response;
@@ -361,12 +359,12 @@ public class WorkloadDetailsServiceTest {
         when(mockHttpEntity.getContent()).thenReturn(inputStream);
         when(JSONUtil.getJSON(anyList())).thenReturn(workloadResponse);
 
-        TMOAppMetadataDetails expectedTmoAppMetadataDetails = new TMOAppMetadataDetails();
+        TMOMetaData expectedTmoAppMetadataDetails = new TMOMetaData();
         expectedTmoAppMetadataDetails.setApplicationName("Other");
         expectedTmoAppMetadataDetails.setApplicationOwnerEmailId("owner@company.com");
         expectedTmoAppMetadataDetails.setProjectLeadEmailId("lead@company.com");
         expectedTmoAppMetadataDetails.setApplicationTag("Other");
-        List<TMOAppMetadataDetails> tmoAppMetadataDetailsList = workloadDetailsService.getAllApplicationDetailsFromCLM();
+        List<TMOMetaData> tmoAppMetadataDetailsList = workloadDetailsService.getAllApplicationDetailsFromCLM();
         assertEquals(expectedTmoAppMetadataDetails.getApplicationName(), tmoAppMetadataDetailsList.get(0).getApplicationName());
     }
 
@@ -385,10 +383,10 @@ public class WorkloadDetailsServiceTest {
         when(reqProcessor.process("/tmo-applicaions","{\"path\":\""+pathStr+"\"}",token)).thenReturn(readResponse);
         List<String> certList = new ArrayList<>();
         certList.add("cert1.company.com");
-        TMOAppMetadataDetails tmoAppMetadataDetails = new TMOAppMetadataDetails("other", "owner@company.com", "other", "lead@company.com", certList, new ArrayList<>(), true);
-        List<TMOAppMetadataDetails> tmoAppMetadataDetailsList = new ArrayList<>();
+        TMOMetaData tmoAppMetadataDetails = new TMOMetaData("other", "owner@company.com", "other", "lead@company.com", "other", certList, new ArrayList<>(),"other","other","other","other","other");
+        List<TMOMetaData> tmoAppMetadataDetailsList = new ArrayList<>();
         tmoAppMetadataDetailsList.add(tmoAppMetadataDetails);
-        List<TMOAppMetadataDetails> appMetadataList = workloadDetailsService.getAllAppMetadata(token);
+        List<TMOMetaData> appMetadataList = workloadDetailsService.getAllAppMetadata(token);
         assertEquals(tmoAppMetadataDetailsList, appMetadataList);
     }
 
@@ -406,8 +404,8 @@ public class WorkloadDetailsServiceTest {
         when(reqProcessor.process("/tmo-applicaions","{\"path\":\""+pathStr+"\"}",token)).thenReturn(readResponse);
         List<String> certList = new ArrayList<>();
         certList.add("cert1.company.com");
-        List<TMOAppMetadataDetails> tmoAppMetadataDetailsList = new ArrayList<>();
-        List<TMOAppMetadataDetails> appMetadataList = workloadDetailsService.getAllAppMetadata(token);
+        List<TMOMetaData> tmoAppMetadataDetailsList = new ArrayList<>();
+        List<TMOMetaData> appMetadataList = workloadDetailsService.getAllAppMetadata(token);
         assertEquals(tmoAppMetadataDetailsList, appMetadataList);
     }
 
@@ -426,8 +424,8 @@ public class WorkloadDetailsServiceTest {
         when(reqProcessor.process("/tmo-applicaions","{\"path\":\""+pathStr+"\"}",token)).thenReturn(readResponse);
         List<String> certList = new ArrayList<>();
         certList.add("cert1.company.com");
-        List<TMOAppMetadataDetails> tmoAppMetadataDetailsList = new ArrayList<>();
-        List<TMOAppMetadataDetails> appMetadataList = workloadDetailsService.getAllAppMetadata(token);
+        List<TMOMetaData> tmoAppMetadataDetailsList = new ArrayList<>();
+        List<TMOMetaData> appMetadataList = workloadDetailsService.getAllAppMetadata(token);
         assertEquals(tmoAppMetadataDetailsList, appMetadataList);
     }
 
@@ -435,8 +433,8 @@ public class WorkloadDetailsServiceTest {
     public void test_udpateApplicationMetadata_success() throws Exception {
         List<String> certList = new ArrayList<>();
         certList.add("cert1.company.com");
-        TMOAppMetadataDetails tmoAppMetadataDetails = new TMOAppMetadataDetails("other", "owner@company.com", "other", "lead@company.com", certList, new ArrayList<>(), true);
-        TMOAppMetadataDetails tmoAppMetadataDetailsCLM = new TMOAppMetadataDetails("other", "owner1@company.com", "other", "lead@company.com", certList, new ArrayList<>(), true);
+        TMOMetaData tmoAppMetadataDetails = new TMOMetaData("other", "owner@company.com", "other", "lead@company.com", "other", certList, new ArrayList<>(),"other","other","other","other","other");
+        TMOMetaData tmoAppMetadataDetailsCLM = new TMOMetaData("other", "owner@company.com", "other", "lead@company.com", "other", certList, new ArrayList<>(),"other","other","other","other","other");
 
         Response expectedResponse = new Response();
         expectedResponse.setHttpstatus(HttpStatus.NO_CONTENT);
@@ -448,8 +446,8 @@ public class WorkloadDetailsServiceTest {
     public void test_udpateApplicationMetadata_failure() throws Exception {
         List<String> certList = new ArrayList<>();
         certList.add("cert1.company.com");
-        TMOAppMetadataDetails tmoAppMetadataDetails = new TMOAppMetadataDetails("other", "owner@company.com", "other", "lead@company.com", certList, new ArrayList<>(), true);
-        TMOAppMetadataDetails tmoAppMetadataDetailsCLM = new TMOAppMetadataDetails("other", "owner1@company.com", "other", "lead@company.com", certList, new ArrayList<>(), true);
+        TMOMetaData tmoAppMetadataDetails = new TMOMetaData("other", "owner@company.com", "other", "lead@company.com", "other", certList, new ArrayList<>(),"other","other","other","other","other");
+        TMOMetaData tmoAppMetadataDetailsCLM = new TMOMetaData("other", "owner@company.com", "other", "lead@company.com", "other", certList, new ArrayList<>(),"other","other","other","other","other");
 
         Response expectedResponse = new Response();
         expectedResponse.setHttpstatus(HttpStatus.NO_CONTENT);
